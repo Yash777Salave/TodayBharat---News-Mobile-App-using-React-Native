@@ -11,18 +11,8 @@ import React, {useEffect, useState} from 'react';
 import GlobalApi from '../../service/GlobalApi';
 import Color from '../../style/Color';
 
-const TopHeadlineSlider = () => {
-  const [newsList, setNewsList] = useState([]);
+const TopHeadlineSlider = ({newsList}) => {
 
-  const getTopHeadline = async () => {
-    const result = (await GlobalApi.getTopHeadline).data;
-    console.log(result);
-    setNewsList(result.articles);
-    // console.log('hello');
-  };
-  useEffect(() => {
-    getTopHeadline();
-  }, []);
 
   return (
     <View style={styles.MainContainer}>
@@ -32,7 +22,9 @@ const TopHeadlineSlider = () => {
         renderItem={({item}) => (
           <TouchableOpacity style={styles.newsListContainer}>
             <Image source={{uri: item.urlToImage}} style={styles.NewsImages} />
-            <Text numberOfLines={3} style={styles.sourceTitle}>{item.title}</Text>
+            <Text numberOfLines={3} style={styles.sourceTitle}>
+              {item.title}
+            </Text>
             <Text style={styles.sourceName}>{item?.source?.name}</Text>
           </TouchableOpacity>
         )}
@@ -44,8 +36,8 @@ const TopHeadlineSlider = () => {
 export default TopHeadlineSlider;
 
 const styles = StyleSheet.create({
-  MainContainer:{
-marginTop:14
+  MainContainer: {
+    marginTop: 14,
   },
   NewsImages: {
     height: Dimensions.get('screen').width * 0.77,
@@ -60,8 +52,7 @@ marginTop:14
     color: Color.primary,
   },
   sourceTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    
+    fontSize: 22,
+    fontWeight: '800',
   },
 });

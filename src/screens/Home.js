@@ -1,10 +1,23 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CategoryTextSlider from '../componant/home/CategoryTextSlider';
 import color from '../style/Color';
 import TopHeadlineSlider from '../componant/home/TopHeadlineSlider';
+import GlobalApi from '../service/GlobalApi';
+import Headline from '../componant/home/Headline';
 
 const Home = () => {
+    const [newsList, setNewsList] = useState([]);
+  
+    const getTopHeadline = async () => {
+      const result = (await GlobalApi.getTopHeadline).data;
+      console.log(result);
+      setNewsList(result.articles);
+      // console.log('hello');
+    };
+    useEffect(() => {
+      getTopHeadline();
+    }, []);
   return (
     <View style={styles.mainConatiner}>
       <View style={styles.HeadingComponant}>
@@ -16,7 +29,8 @@ const Home = () => {
       </View>
       <CategoryTextSlider />
       {/* top headline slider */}
-      <TopHeadlineSlider />
+      <TopHeadlineSlider newsList ={newsList}/>
+      <Headline newsList = {newsList}/>
     </View>
   );
 };
