@@ -2,6 +2,7 @@ import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import CategoryTextSlider from '../componant/home/CategoryTextSlider';
 import color from '../style/Color';
+import TopHeadlineSlider from '../componant/home/TopHeadlineSlider';
 
 const Home = () => {
   return (
@@ -14,6 +15,8 @@ const Home = () => {
         />
       </View>
       <CategoryTextSlider />
+      {/* top headline slider */}
+      <TopHeadlineSlider />
     </View>
   );
 };

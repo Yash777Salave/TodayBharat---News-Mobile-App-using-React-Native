@@ -7,27 +7,27 @@ const CategoryTextSlider = () => {
   const categories = [
     {
       id: 1,
-      name: 'Sports',
-    },
-    {
-      id: 2,
-      name: 'Life',
-    },
-    {
-      id: 3,
-      name: 'Movie',
-    },
-    {
-      id: 4,
       name: 'Latest',
     },
     {
-      id: 5,
+      id: 2,
       name: 'World',
     },
     {
-      id: 6,
+      id: 3,
       name: 'Business',
+    },
+    {
+      id: 4,
+      name: 'Sports',
+    },
+    {
+      id: 5,
+      name: 'Life',
+    },
+    {
+      id: 6,
+      name: 'Movies',
     },
   ];
   return (
