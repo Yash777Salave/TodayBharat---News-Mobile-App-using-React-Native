@@ -12,12 +12,11 @@ import GlobalApi from '../../service/GlobalApi';
 import Color from '../../style/Color';
 
 const TopHeadlineSlider = ({newsList}) => {
-
-
   return (
     <View style={styles.MainContainer}>
       <FlatList
         horizontal
+        showsHorizontalScrollIndicator={false}
         data={newsList}
         renderItem={({item}) => (
           <TouchableOpacity style={styles.newsListContainer}>
@@ -50,6 +49,7 @@ const styles = StyleSheet.create({
   sourceName: {
     fontSize: 15,
     color: Color.primary,
+    marginBottom:18
   },
   sourceTitle: {
     fontSize: 22,

@@ -5,7 +5,7 @@ import Home from './src/screens/Home';
 const App = () => {
   return (
     <View style={styles.mainContainer}>
-    <Home/>
+      <Home />
     </View>
   );
 };
@@ -13,7 +13,8 @@ const App = () => {
 export default App;
 
 const styles = StyleSheet.create({
-  mainContainer:{
-    padding:10
-  }
+  mainContainer: {
+    padding: 10,
+    backgroundColor: '#ffff',
+  },
 });
