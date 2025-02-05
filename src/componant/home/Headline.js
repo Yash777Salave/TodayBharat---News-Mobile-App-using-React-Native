@@ -8,8 +8,11 @@ import {
 } from 'react-native';
 import React from 'react';
 import Color from '../../style/Color';
+import { useNavigation } from '@react-navigation/native';
 
 const Headline = ({newsList}) => {
+    const navigation = useNavigation();
+  
   return (
     <View>
       <View style={{borderTopWidth: 1, borderTopColor: '#A8A8A8'}}></View>
@@ -18,7 +21,10 @@ const Headline = ({newsList}) => {
         data={newsList}
         renderItem={({item}) => (
           <View>
-            <TouchableOpacity style={styles.HeadlineContainer}>
+            <TouchableOpacity style={styles.HeadlineContainer}
+             onPress={() => {
+              navigation.navigate('ReadNews',{news:item});
+            }}>
               <Image
                 source={{uri: item.urlToImage}}
                 style={styles.headlineImg}

@@ -1,12 +1,16 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import Home from './src/screens/Home';
+import {NavigationContainer} from '@react-navigation/native';
+import HomeNavigation from './src/Navigations/HomeNavigation';
 
 const App = () => {
   return (
-    <View style={styles.mainContainer}>
-      <Home />
-    </View>
+    // <SafeAreaView style={styles.mainContainer}>
+    <NavigationContainer>
+      <HomeNavigation />
+    </NavigationContainer>
+    // </SafeAreaView>
   );
 };
 

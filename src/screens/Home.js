@@ -1,13 +1,23 @@
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Dimensions,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import CategoryTextSlider from '../componant/home/CategoryTextSlider';
 import color from '../style/Color';
 import TopHeadlineSlider from '../componant/home/TopHeadlineSlider';
 import GlobalApi from '../service/GlobalApi';
 import Headline from '../componant/home/Headline';
+import Color from '../style/Color';
 
 const Home = () => {
   const [newsList, setNewsList] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const getTopHeadline = async () => {
     const result = (await GlobalApi.getTopHeadline).data;
@@ -16,8 +26,17 @@ const Home = () => {
     // console.log('hello');
   };
   useEffect(() => {
-    getTopHeadline();
+    // getTopHeadline();
+    getNewsByCategory('latest');
   }, []);
+
+  const getNewsByCategory = async category => {
+    setLoading(true);
+    const result = (await GlobalApi.getByCategories(category)).data;
+    console.log(result, 'category-----');
+    setNewsList(result.articles);
+    setLoading(false);
+  };
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
@@ -29,10 +48,25 @@ const Home = () => {
           style={styles.bellIcon}
         />
       </View>
-      <CategoryTextSlider />
-      {/* top headline slider */}
-      <TopHeadlineSlider newsList={newsList} />
-      <Headline newsList={newsList} />
+      <View>
+        <CategoryTextSlider
+          onCategoryCLick={category => {
+            getNewsByCategory(category);
+          }}
+        />
+        {loading ? (
+          <ActivityIndicator
+            size={'large'}
+            color={Color.primary}
+            style={{marginTop: Dimensions.get('screen').height * 0.4}}
+          />
+        ) : (
+          <>
+            <TopHeadlineSlider newsList={newsList} />
+            <Headline newsList={newsList} />
+          </>
+        )}
+      </View>
     </ScrollView>
   );
 };
@@ -46,11 +80,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom:14
+    marginBottom: 14,
   },
   mainConatiner: {
     // flex: 1,
     // margin: 10,
+    padding: 10,
+    backgroundColor: '#ffff',
   },
   heading: {
     fontSize: 25,

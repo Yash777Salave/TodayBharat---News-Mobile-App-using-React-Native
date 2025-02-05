@@ -10,8 +10,10 @@ import {
 import React, {useEffect, useState} from 'react';
 import GlobalApi from '../../service/GlobalApi';
 import Color from '../../style/Color';
+import {useNavigation} from '@react-navigation/native';
 
 const TopHeadlineSlider = ({newsList}) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.MainContainer}>
       <FlatList
@@ -19,7 +21,11 @@ const TopHeadlineSlider = ({newsList}) => {
         showsHorizontalScrollIndicator={false}
         data={newsList}
         renderItem={({item}) => (
-          <TouchableOpacity style={styles.newsListContainer}>
+          <TouchableOpacity
+            style={styles.newsListContainer}
+            onPress={() => {
+              navigation.navigate('ReadNews',{news:item});
+            }}>
             <Image source={{uri: item.urlToImage}} style={styles.NewsImages} />
             <Text numberOfLines={3} style={styles.sourceTitle}>
               {item.title}
@@ -49,7 +55,7 @@ const styles = StyleSheet.create({
   sourceName: {
     fontSize: 15,
     color: Color.primary,
-    marginBottom:18
+    marginBottom: 18,
   },
   sourceTitle: {
     fontSize: 22,
